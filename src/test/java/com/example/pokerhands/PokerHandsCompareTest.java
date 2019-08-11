@@ -31,11 +31,30 @@ public class PokerHandsCompareTest {
         List<Card> firstPlayer = new ArrayList<>();
         List<Card> secondPlayer = new ArrayList<>();
 
-        firstPlayer = addCards(firstPlayer, "3d");
-        firstPlayer = addCards(firstPlayer, "2h");
+        addCards(firstPlayer, "3d");
+        addCards(firstPlayer, "2h");
 
-        secondPlayer = addCards(secondPlayer, "5s");
-        secondPlayer = addCards(secondPlayer, "9c");
+        addCards(secondPlayer, "5s");
+        addCards(secondPlayer, "9c");
         assertEquals(2, pokerHandsCompare.getWinner(firstPlayer, secondPlayer));
+    }
+
+    @Test
+    public void should_return_one_when_given_3d_2h_5c_kc_ac_and_5s_9c_kh_6c_7h() {
+        List<Card> firstPlayer = new ArrayList<>();
+        List<Card> secondPlayer = new ArrayList<>();
+
+        addCards(firstPlayer, "3d");
+        addCards(firstPlayer, "2h");
+        addCards(firstPlayer, "5c");
+        addCards(firstPlayer, "kc");
+        addCards(firstPlayer, "ac");
+
+        addCards(secondPlayer, "5s");
+        addCards(secondPlayer, "9c");
+        addCards(secondPlayer, "kh");
+        addCards(secondPlayer, "6c");
+        addCards(secondPlayer, "7h");
+        assertEquals(1, pokerHandsCompare.getWinner(firstPlayer, secondPlayer));
     }
 }
