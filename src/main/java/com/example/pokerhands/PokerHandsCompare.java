@@ -8,6 +8,7 @@ public class PokerHandsCompare {
 
     public static final int OnePair = 2;
     public static final int TwoPair = 3;
+    public static final int ThreeOfAKind = 4;
 
     public int getWinner(List<Card> firstPlayer, List<Card> secondPlayer) {
         int maxFirst = -1;
@@ -71,8 +72,10 @@ public class PokerHandsCompare {
         }
         if (n.size() == 4) {
             return OnePair;
-        } else if (n.size() == 3) {
+        } else if (n.size() == 3 && n.contains(2)) {
             return TwoPair;
+        } else if (n.size() == 3 && n.contains(3)) {
+            return ThreeOfAKind;
         }
         return 0;
     }

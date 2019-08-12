@@ -114,4 +114,24 @@ public class PokerHandsCompareTest {
         addCards(secondPlayer, "2c");
         assertEquals(2, pokerHandsCompare.getWinner(firstPlayer, secondPlayer));
     }
+
+    @Test
+    public void should_return_one_when_given_td_ts_tc_9c_kd_and_kc_kh_8c_8h_2c() {
+        List<Card> firstPlayer = new ArrayList<>();
+        List<Card> secondPlayer = new ArrayList<>();
+
+        addCards(firstPlayer, "td");
+        addCards(firstPlayer, "ts");
+        addCards(firstPlayer, "tc");
+        addCards(firstPlayer, "9c");
+        addCards(firstPlayer, "kd");
+
+        addCards(secondPlayer, "kc");
+        addCards(secondPlayer, "kh");
+        addCards(secondPlayer, "8c");
+        addCards(secondPlayer, "8h");
+        addCards(secondPlayer, "2c");
+        assertEquals(1, pokerHandsCompare.getWinner(firstPlayer, secondPlayer));
+    }
+
 }

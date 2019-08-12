@@ -35,5 +35,11 @@ player1: td ts 5s 9c kd<br>
 player2: 3c 3h 8c 8h 2c
 ####return
 2
+##7
+####given
+player1: td ts tc 9c kd<br>
+player2: kc kh 8c 8h 2c
+####return
+1
 
 
