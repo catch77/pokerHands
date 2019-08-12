@@ -1,11 +1,13 @@
 package com.example.pokerhands;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PokerHandsCompare {
 
     public static final int OnePair = 2;
+    public static final int TwoPair = 3;
 
     public int getWinner(List<Card> firstPlayer, List<Card> secondPlayer) {
         int maxFirst = -1;
@@ -32,14 +34,29 @@ public class PokerHandsCompare {
         } else if (secondLevel > firstLevel) {
             return 2;
         } else {
-            if (maxFirst > maxSecond) {
-                return 1;
+            int[] nums1 = new int[15];
+            int[] nums2 = new int[15];
+            Arrays.fill(nums1, 0);
+            Arrays.fill(nums2, 0);
+            for (int i = 0; i < firstPlayer.size(); i++) {
+                nums1[firstPlayer.get(i).getNum()]++;
+                nums2[secondPlayer.get(i).getNum()]++;
             }
-            return 2;
+            int result1 = 0;
+            int result2 = 0;
+            for (int i = 0; i < 15; i++) {
+                result1 += Math.pow(i * i, nums1[i]);
+                result2 += Math.pow(i * i, nums2[i]);
+            }
+            if (result1 > result2) {
+                return 1;
+            } else if (result2 > result1) {
+                return 2;
+            } else {
+                return 0;
+            }
         }
     }
-
-
 
     private int cardsType(List<Card> cards) {
         int[] nums = new int[20];
@@ -54,6 +71,8 @@ public class PokerHandsCompare {
         }
         if (n.size() == 4) {
             return OnePair;
+        } else if (n.size() == 3) {
+            return TwoPair;
         }
         return 0;
     }
