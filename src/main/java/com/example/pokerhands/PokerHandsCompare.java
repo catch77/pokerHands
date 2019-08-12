@@ -1,52 +1,61 @@
 package com.example.pokerhands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PokerHandsCompare {
+
+    public static final int OnePair = 2;
+
     public int getWinner(List<Card> firstPlayer, List<Card> secondPlayer) {
         int maxFirst = -1;
         int first = -1;
         int maxSecond = -1;
         int second = -1;
+        int firstLevel = 0;
+        int secondLevel = 0;
         for (int i = 0; i < firstPlayer.size(); i++) {
-            first = translateNum(firstPlayer, i);
+            first = firstPlayer.get(i).getNum();
             if (maxFirst < first) {
                 maxFirst = first;
             }
-            second = translateNum(secondPlayer, i);
+            second = secondPlayer.get(i).getNum();
             if (maxSecond < second) {
                 maxSecond = second;
             }
         }
-        if (maxFirst > maxSecond) {
+        firstLevel = cardsType(firstPlayer);
+        secondLevel = cardsType(secondPlayer);
+
+        if (firstLevel > secondLevel) {
             return 1;
+        } else if (secondLevel > firstLevel) {
+            return 2;
+        } else {
+            if (maxFirst > maxSecond) {
+                return 1;
+            }
+            return 2;
         }
-        return 2;
     }
 
-    private int translateNum(List<Card> secondPlayer, int i) {
-        int second;
-        switch (secondPlayer.get(i).getNum()) {
-            case 't':
-                second = 10;
-                break;
-            case 'j':
-                second = 11;
-                break;
-            case 'q':
-                second = 12;
-                break;
-            case 'k':
-                second = 13;
-                break;
-            case 'a':
-                second = 14;
-                break;
-            default:
-                second = secondPlayer.get(i).getNum()-48;
-                break;
+
+
+    private int cardsType(List<Card> cards) {
+        int[] nums = new int[20];
+        for (int i = 0; i < cards.size(); i++) {
+            nums[cards.get(i).getNum()]++;
         }
-        return second;
+        List<Integer> n = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                n.add(nums[i]);
+            }
+        }
+        if (n.size() == 4) {
+            return OnePair;
+        }
+        return 0;
     }
 
 }

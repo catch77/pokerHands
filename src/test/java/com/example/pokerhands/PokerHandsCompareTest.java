@@ -57,4 +57,23 @@ public class PokerHandsCompareTest {
         addCards(secondPlayer, "7h");
         assertEquals(1, pokerHandsCompare.getWinner(firstPlayer, secondPlayer));
     }
+
+    @Test
+    public void should_return_two_when_given_5s_9c_ah_6c_7h_and_3d_3s_5c_kc_9d() {
+        List<Card> firstPlayer = new ArrayList<>();
+        List<Card> secondPlayer = new ArrayList<>();
+
+        addCards(firstPlayer, "5s");
+        addCards(firstPlayer, "9c");
+        addCards(firstPlayer, "ah");
+        addCards(firstPlayer, "6c");
+        addCards(firstPlayer, "7h");
+
+        addCards(secondPlayer, "3d");
+        addCards(secondPlayer, "3s");
+        addCards(secondPlayer, "5c");
+        addCards(secondPlayer, "kc");
+        addCards(secondPlayer, "9d");
+        assertEquals(2, pokerHandsCompare.getWinner(firstPlayer, secondPlayer));
+    }
 }
